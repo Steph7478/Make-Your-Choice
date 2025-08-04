@@ -9,6 +9,8 @@ public interface ChoiceEntityReadRepository {
 
     List<ChoiceEntity> findByDialogId(Long dialogId);
 
+    List<ChoiceEntity> findByNextDialogId(Long dialogId);
+
     Optional<ChoiceEntity> findById(Long id);
 
 }
