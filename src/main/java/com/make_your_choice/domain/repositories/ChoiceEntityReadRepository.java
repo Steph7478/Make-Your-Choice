@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ChoiceEntityReadRepository {
+
     List<ChoiceEntity> findByDialogId(Long dialogId);
 
     Optional<ChoiceEntity> findById(Long id);
+
 }

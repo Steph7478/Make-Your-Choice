@@ -13,7 +13,6 @@ public class ChoiceEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinColumn(name = "choice")
     private String choice;
 
     @ManyToOne
