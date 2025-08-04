@@ -1,3 +1,7 @@
+# Ignorar arquivos de configuração de ambiente
+.env
+*.env
+
 HELP.md
 target/
 .mvn/wrapper/maven-wrapper.jar
