@@ -4,6 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 
@@ -15,7 +16,8 @@ public class DialogEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String text;
+    @JoinColumn(name = "dialog")
+    private String dialog;
 
     public DialogEntity() {
     }
@@ -27,7 +29,7 @@ public class DialogEntity {
         return "D" + this.id;
     }
 
-    public String getText() {
-        return text;
+    public String getDialog() {
+        return dialog;
     }
 }

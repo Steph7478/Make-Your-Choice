@@ -24,10 +24,10 @@ public class DialogEntityTest {
     }
 
     @Test
-    void testGetText() throws Exception {
+    void testGetDialog() throws Exception {
         DialogEntity dialog = new DialogEntity();
-        setField(dialog, "text", "Hello im the dialog test!");
+        setField(dialog, "dialog", "Hello im the dialog test!");
 
-        assertEquals("Hello im the dialog test!", dialog.getText());
+        assertEquals("Hello im the dialog test!", dialog.getDialog());
     }
 }
