@@ -6,10 +6,11 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ChoiceEntityReadRepository {
+    List<ChoiceEntity> findAll();
 
-    List<ChoiceEntity> findByDialogId(Long dialogId);
+    Optional<ChoiceEntity> findByDialogId(Long dialogId);
 
-    List<ChoiceEntity> findByNextDialogId(Long dialogId);
+    Optional<ChoiceEntity> findByNextDialogId(Long dialogId);
 
     Optional<ChoiceEntity> findById(Long id);
 
