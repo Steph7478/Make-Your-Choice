@@ -26,11 +26,32 @@ public class ChoiceEntityTest {
     }
 
     @Test
-    void testGetText()
+    void testGetChoice()
             throws Exception {
         ChoiceEntity choice = new ChoiceEntity();
         setField(choice, "choice", "Hello im the choice text!");
 
         assertEquals("Hello im the choice text!", choice.getChoice());
+    }
+
+    @Test
+    void testGetDialog()
+            throws Exception {
+        ChoiceEntity choice = new ChoiceEntity();
+        DialogEntity dialog = new DialogEntity();
+        setField(choice, "dialog", dialog);
+
+        assertEquals(dialog, choice.getDialog());
+    }
+
+    @Test
+    void testGetNextDialog()
+            throws Exception {
+        ChoiceEntity choice = new ChoiceEntity();
+        DialogEntity dialog = new DialogEntity();
+
+        setField(choice, "nextDialog", dialog);
+
+        assertEquals(dialog, choice.getNextDialog());
     }
 }

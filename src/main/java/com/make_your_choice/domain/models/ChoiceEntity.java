@@ -17,6 +17,9 @@ public class ChoiceEntity {
     @ManyToOne
     private DialogEntity dialog;
 
+    @ManyToOne
+    private DialogEntity nextDialog;
+
     public ChoiceEntity() {
     }
 
@@ -29,6 +32,14 @@ public class ChoiceEntity {
 
     public String getChoice() {
         return choice;
+    }
+
+    public DialogEntity getDialog() {
+        return dialog;
+    }
+
+    public DialogEntity getNextDialog() {
+        return nextDialog;
     }
 
 }
