@@ -41,7 +41,7 @@ public class ChoiceEntityTest {
         DialogEntity dialog = new DialogEntity();
         setField(choice, "dialog", dialog);
 
-        assertEquals(dialog, choice.getDialog());
+        assertEquals(dialog, choice.getDialogCode());
     }
 
     @Test
@@ -52,6 +52,6 @@ public class ChoiceEntityTest {
 
         setField(choice, "nextDialog", dialog);
 
-        assertEquals(dialog, choice.getNextDialog());
+        assertEquals(dialog, choice.getNextDialogCode());
     }
 }
