@@ -33,16 +33,22 @@ public class ChoiceEntity {
         return "C" + this.id;
     }
 
+    public String getDialogCode() {
+        if (this.dialog == null) {
+            return null;
+        }
+        return "D" + this.dialog;
+    }
+
+    public String getNextDialogCode() {
+        if (this.nextDialog == null) {
+            return null;
+        }
+        return "D" + this.nextDialog;
+    }
+
     public String getChoice() {
         return choice;
-    }
-
-    public DialogEntity getDialog() {
-        return dialog;
-    }
-
-    public DialogEntity getNextDialog() {
-        return nextDialog;
     }
 
 }
