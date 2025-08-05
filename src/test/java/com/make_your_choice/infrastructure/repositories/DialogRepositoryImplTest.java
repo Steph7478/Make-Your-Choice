@@ -1,7 +1,6 @@
-package com.make_your_choice.infrastructure;
+package com.make_your_choice.infrastructure.repositories;
 
 import com.make_your_choice.domain.models.DialogEntity;
-import com.make_your_choice.infrastructure.repositories.DialogRepositoryImpl;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
