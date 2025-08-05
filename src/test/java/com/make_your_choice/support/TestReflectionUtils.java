@@ -13,4 +13,14 @@ public class TestReflectionUtils {
             throw new RuntimeException("Reflection set error", e);
         }
     }
+
+    public static Object getField(Object target, String fieldName) {
+        try {
+            Field field = target.getClass().getDeclaredField(fieldName);
+            field.setAccessible(true);
+            return field.get(target);
+        } catch (Exception e) {
+            throw new RuntimeException("Reflection get error", e);
+        }
+    }
 }
