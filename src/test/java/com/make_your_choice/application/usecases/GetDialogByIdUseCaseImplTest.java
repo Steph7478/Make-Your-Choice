@@ -10,6 +10,7 @@ import org.mockito.Mockito;
 
 import java.util.Optional;
 
+import static com.make_your_choice.support.TestReflectionUtils.setField;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -28,7 +29,7 @@ public class GetDialogByIdUseCaseImplTest {
     void testGetDialogById_Found() {
         String code = "D42";
         DialogEntity dialog = new DialogEntity();
-        com.make_your_choice.support.TestReflectionUtils.setField(dialog, "id", 42L);
+        setField(dialog, "id", 42L);
 
         when(dialogRepository.findByCode(code)).thenReturn(Optional.of(dialog));
 
