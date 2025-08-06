@@ -1,8 +1,8 @@
-package com.make_your_choice.application.usecases.getdialog;
+package com.make_your_choice.application.usecases.getdialogbyid;
 
 import com.make_your_choice.domain.entities.DialogEntity;
 import java.util.Optional;
 
-public interface GetDialogUseCase {
+public interface GetDialogByIdUseCase {
     Optional<DialogEntity> execute(String code);
 }

@@ -1,6 +1,6 @@
 package com.make_your_choice.application.usecases;
 
-import com.make_your_choice.application.usecases.getdialog.GetDialogUseCaseImpl;
+import com.make_your_choice.application.usecases.getdialogbyid.GetDialogByIdUseCaseImpl;
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
 
@@ -16,12 +16,12 @@ import static org.mockito.Mockito.*;
 public class GetDialogUseCaseImplTest {
 
     private DialogEntityReadRepository dialogRepository;
-    private GetDialogUseCaseImpl getDialogUseCase;
+    private GetDialogByIdUseCaseImpl getDialogUseCase;
 
     @BeforeEach
     void setup() {
         dialogRepository = Mockito.mock(DialogEntityReadRepository.class);
-        getDialogUseCase = new GetDialogUseCaseImpl(dialogRepository);
+        getDialogUseCase = new GetDialogByIdUseCaseImpl(dialogRepository);
     }
 
     @Test

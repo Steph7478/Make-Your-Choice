@@ -1,22 +1,22 @@
-package com.make_your_choice.application.usecases.getdialog;
+package com.make_your_choice.application.usecases.getalldialog;
 
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
+import java.util.List;
 
 @Component
-public class GetDialogUseCaseImpl implements GetDialogUseCase {
+public class GetAllDialogsUseCaseImpl implements GetAllDialogsUseCase {
 
     private final DialogEntityReadRepository dialogRepository;
 
-    public GetDialogUseCaseImpl(DialogEntityReadRepository dialogRepository) {
+    public GetAllDialogsUseCaseImpl(DialogEntityReadRepository dialogRepository) {
         this.dialogRepository = dialogRepository;
     }
 
     @Override
-    public Optional<DialogEntity> execute(String code) {
-        return dialogRepository.findByCode(code);
+    public List<DialogEntity> execute() {
+        return dialogRepository.findAll();
     }
 }

@@ -17,6 +17,12 @@ public abstract class AbstractCodeRepository<T> {
         this.codePrefix = codePrefix;
     }
 
+    public List<T> findAll() {
+        String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";
+        return entityManager.createQuery(jpql, entityClass)
+                .getResultList();
+    }
+
     public Optional<T> findByCode(String code) {
         if (code == null || !code.startsWith(codePrefix)) {
             return Optional.empty();

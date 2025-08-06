@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 
 public interface ChoiceEntityReadRepository {
+    List<ChoiceEntity> findAll();
 
     Optional<ChoiceEntity> findByCode(String code);
 

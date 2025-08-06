@@ -6,6 +6,7 @@ import java.util.Optional;
 import com.make_your_choice.domain.entities.DialogEntity;
 
 public interface DialogEntityReadRepository {
+    List<DialogEntity> findAll();
 
     List<DialogEntity> findAllByCodes(List<String> codes);
 
