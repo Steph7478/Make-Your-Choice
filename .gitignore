@@ -1,6 +1,7 @@
 # Ignorar arquivos de configuração de ambiente
 .env*
 *.env
+/dev.db
 
 HELP.md
 target/

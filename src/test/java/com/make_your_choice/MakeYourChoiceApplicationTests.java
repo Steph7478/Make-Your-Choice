@@ -1,15 +1,25 @@
 package com.make_your_choice;
 
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.make_your_choice.support.DotenvInitializer;
+import io.github.cdimascio.dotenv.Dotenv;
 
 @SpringBootTest
-class MakeYourChoiceApplicationTests extends DotenvInitializer {
+class MakeYourChoiceApplicationTests {
+
+	@BeforeAll
+	static void initEnv() {
+		Dotenv dotenv = Dotenv.configure()
+				.filename(".env." + System.getProperty("spring.profiles.active", "test"))
+				.ignoreIfMissing()
+				.load();
+
+		dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+	}
 
 	@Test
 	void contextLoads() {
 	}
-
 }
