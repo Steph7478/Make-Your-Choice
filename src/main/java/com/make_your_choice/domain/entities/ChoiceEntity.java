@@ -37,14 +37,14 @@ public class ChoiceEntity {
         if (this.dialog == null) {
             return null;
         }
-        return "D" + this.dialog;
+        return this.dialog.getCode();
     }
 
     public String getNextDialogCode() {
         if (this.nextDialog == null) {
             return null;
         }
-        return "D" + this.nextDialog;
+        return this.nextDialog.getCode();
     }
 
     public String getChoice() {

@@ -5,15 +5,11 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 
-import com.make_your_choice.domain.entities.ChoiceEntity;
-import com.make_your_choice.domain.entities.DialogEntity;
-
 import static com.make_your_choice.support.TestReflectionUtils.setField;
 
 public class ChoiceEntityTest {
     @Test
-    void testGetCodeReturnsNullWhenIdIsNull()
-            throws Exception {
+    void testGetCodeReturnsNullWhenIdIsNull() throws Exception {
         ChoiceEntity choice = new ChoiceEntity();
         setField(choice, "id", null);
 
@@ -21,8 +17,7 @@ public class ChoiceEntityTest {
     }
 
     @Test
-    void testGetCodeReturnsCorrectCode()
-            throws Exception {
+    void testGetCodeReturnsCorrectCode() throws Exception {
         ChoiceEntity choice = new ChoiceEntity();
         setField(choice, "id", 42L);
 
@@ -30,8 +25,7 @@ public class ChoiceEntityTest {
     }
 
     @Test
-    void testGetChoice()
-            throws Exception {
+    void testGetChoice() throws Exception {
         ChoiceEntity choice = new ChoiceEntity();
         setField(choice, "choice", "Hello im the choice text!");
 
@@ -39,23 +33,22 @@ public class ChoiceEntityTest {
     }
 
     @Test
-    void testGetDialog()
-            throws Exception {
+    void testGetDialogCode() throws Exception {
         ChoiceEntity choice = new ChoiceEntity();
         DialogEntity dialog = new DialogEntity();
+        setField(dialog, "id", 7L);
         setField(choice, "dialog", dialog);
 
-        assertEquals(dialog, choice.getDialogCode());
+        assertEquals("D7", choice.getDialogCode());
     }
 
     @Test
-    void testGetNextDialog()
-            throws Exception {
+    void testGetNextDialogCode() throws Exception {
         ChoiceEntity choice = new ChoiceEntity();
         DialogEntity dialog = new DialogEntity();
-
+        setField(dialog, "id", 99L);
         setField(choice, "nextDialog", dialog);
 
-        assertEquals(dialog, choice.getNextDialogCode());
+        assertEquals("D99", choice.getNextDialogCode());
     }
 }
