@@ -1,6 +1,6 @@
-package com.make_your_choice.application.usecases;
+package com.make_your_choice.application.usecases.dialog;
 
-import com.make_your_choice.application.usecases.getdialogbyid.GetDialogByIdUseCaseImpl;
+import com.make_your_choice.application.usecases.dialog.getdialogbyid.GetDialogByIdUseCaseImpl;
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
 

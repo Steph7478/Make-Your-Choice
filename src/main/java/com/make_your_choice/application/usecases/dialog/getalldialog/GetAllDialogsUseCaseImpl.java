@@ -1,4 +1,4 @@
-package com.make_your_choice.application.usecases.getalldialog;
+package com.make_your_choice.application.usecases.dialog.getalldialog;
 
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;

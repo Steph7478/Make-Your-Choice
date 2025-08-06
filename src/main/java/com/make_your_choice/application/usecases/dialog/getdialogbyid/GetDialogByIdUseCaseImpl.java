@@ -1,4 +1,4 @@
-package com.make_your_choice.application.usecases.getdialogbyid;
+package com.make_your_choice.application.usecases.dialog.getdialogbyid;
 
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;

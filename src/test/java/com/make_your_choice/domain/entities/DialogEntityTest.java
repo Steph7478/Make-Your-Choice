@@ -4,8 +4,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import com.make_your_choice.domain.entities.DialogEntity;
-
 import static com.make_your_choice.support.TestReflectionUtils.setField;
 
 public class DialogEntityTest {

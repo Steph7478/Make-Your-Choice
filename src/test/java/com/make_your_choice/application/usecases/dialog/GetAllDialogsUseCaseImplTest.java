@@ -1,6 +1,6 @@
-package com.make_your_choice.application.usecases;
+package com.make_your_choice.application.usecases.dialog;
 
-import com.make_your_choice.application.usecases.getalldialog.GetAllDialogsUseCaseImpl;
+import com.make_your_choice.application.usecases.dialog.getalldialog.GetAllDialogsUseCaseImpl;
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
 import org.junit.jupiter.api.BeforeEach;
