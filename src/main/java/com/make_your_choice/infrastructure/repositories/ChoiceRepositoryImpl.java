@@ -13,12 +13,9 @@ import java.util.Optional;
 @Repository
 public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> implements ChoiceEntityReadRepository {
 
-    private final EntityManager entityManager;
-
     @Autowired
     public ChoiceRepositoryImpl(EntityManager entityManager) {
         super(entityManager, ChoiceEntity.class, "C");
-        this.entityManager = entityManager;
     }
 
     private Optional<DialogEntity> findDialogByCode(String dialogCode) {
