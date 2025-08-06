@@ -13,7 +13,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class GetDialogUseCaseImplTest {
+public class GetDialogByIdUseCaseImplTest {
 
     private DialogEntityReadRepository dialogRepository;
     private GetDialogByIdUseCaseImpl getDialogUseCase;
