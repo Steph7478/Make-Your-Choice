@@ -1,9 +1,9 @@
 package com.make_your_choice.domain.repositories;
 
-import com.make_your_choice.domain.models.ChoiceEntity;
-
 import java.util.List;
 import java.util.Optional;
+
+import com.make_your_choice.domain.entities.ChoiceEntity;
 
 public interface ChoiceEntityReadRepository {
 

@@ -1,11 +1,12 @@
 package com.make_your_choice.infrastructure.repositories;
 
-import com.make_your_choice.domain.models.DialogEntity;
 import jakarta.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
+
+import com.make_your_choice.domain.entities.DialogEntity;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.make_your_choice.domain.models;
+package com.make_your_choice.domain.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

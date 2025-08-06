@@ -1,6 +1,6 @@
 package com.make_your_choice.infrastructure.repositories;
 
-import com.make_your_choice.domain.models.DialogEntity;
+import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;

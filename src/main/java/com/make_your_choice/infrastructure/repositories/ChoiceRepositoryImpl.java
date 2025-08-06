@@ -1,7 +1,7 @@
 package com.make_your_choice.infrastructure.repositories;
 
-import com.make_your_choice.domain.models.ChoiceEntity;
-import com.make_your_choice.domain.models.DialogEntity;
+import com.make_your_choice.domain.entities.ChoiceEntity;
+import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.ChoiceEntityReadRepository;
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;

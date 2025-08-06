@@ -1,9 +1,13 @@
-package com.make_your_choice.domain.models;
+package com.make_your_choice.domain.entities;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
+
+import com.make_your_choice.domain.entities.ChoiceEntity;
+import com.make_your_choice.domain.entities.DialogEntity;
+
 import static com.make_your_choice.support.TestReflectionUtils.setField;
 
 public class ChoiceEntityTest {
