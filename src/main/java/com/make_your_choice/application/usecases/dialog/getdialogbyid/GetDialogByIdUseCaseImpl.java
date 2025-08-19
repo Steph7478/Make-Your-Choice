@@ -1,7 +1,8 @@
 package com.make_your_choice.application.usecases.dialog.getdialogbyid;
 
 import com.make_your_choice.domain.entities.DialogEntity;
-import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
+import com.make_your_choice.infrastructure.repositories.DialogRepositoryImpl;
+
 import org.springframework.stereotype.Component;
 
 import java.util.Optional;
@@ -9,9 +10,9 @@ import java.util.Optional;
 @Component
 public class GetDialogByIdUseCaseImpl implements GetDialogByIdUseCase {
 
-    private final DialogEntityReadRepository dialogRepository;
+    private final DialogRepositoryImpl dialogRepository;
 
-    public GetDialogByIdUseCaseImpl(DialogEntityReadRepository dialogRepository) {
+    public GetDialogByIdUseCaseImpl(DialogRepositoryImpl dialogRepository) {
         this.dialogRepository = dialogRepository;
     }
 

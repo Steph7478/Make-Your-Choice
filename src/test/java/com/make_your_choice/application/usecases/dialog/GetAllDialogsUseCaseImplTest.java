@@ -2,7 +2,8 @@ package com.make_your_choice.application.usecases.dialog;
 
 import com.make_your_choice.application.usecases.dialog.getalldialog.GetAllDialogsUseCaseImpl;
 import com.make_your_choice.domain.entities.DialogEntity;
-import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
+import com.make_your_choice.infrastructure.repositories.DialogRepositoryImpl;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -14,12 +15,12 @@ import static org.mockito.Mockito.*;
 
 public class GetAllDialogsUseCaseImplTest {
 
-    private DialogEntityReadRepository dialogRepository;
+    private DialogRepositoryImpl dialogRepository;
     private GetAllDialogsUseCaseImpl getAllDialogsUseCase;
 
     @BeforeEach
     void setup() {
-        dialogRepository = Mockito.mock(DialogEntityReadRepository.class);
+        dialogRepository = Mockito.mock(DialogRepositoryImpl.class);
         getAllDialogsUseCase = new GetAllDialogsUseCaseImpl(dialogRepository);
     }
 
