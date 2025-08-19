@@ -33,6 +33,7 @@ public class GetAllDialogsUseCaseImplTest {
 
         when(dialogRepository.findAll()).thenReturn(dialogs);
 
+        // execute test
         List<DialogEntity> result = getAllDialogsUseCase.execute();
 
         assertNotNull(result);
@@ -47,6 +48,7 @@ public class GetAllDialogsUseCaseImplTest {
     void testExecute_ReturnsEmptyList() {
         when(dialogRepository.findAll()).thenReturn(List.of());
 
+        // execute test
         List<DialogEntity> result = getAllDialogsUseCase.execute();
 
         assertNotNull(result);
