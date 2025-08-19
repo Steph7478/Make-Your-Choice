@@ -5,6 +5,9 @@ import com.make_your_choice.infrastructure.repositories.ChoiceRepositoryImpl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class GetAllChoiceUseCaseImpl implements GetAllChoiceUseCase {
     private final ChoiceRepositoryImpl choiceRepository;
 
