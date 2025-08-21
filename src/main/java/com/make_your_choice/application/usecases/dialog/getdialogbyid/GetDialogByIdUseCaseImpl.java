@@ -10,8 +10,11 @@ import java.util.Optional;
 @Component
 public class GetDialogByIdUseCaseImpl implements GetDialogByIdUseCase {
 
+    // attribute of the class
     private final DialogRepositoryImpl dialogRepository;
 
+    // injection of SpringBoot happens here, its equal to this.dialogRepository =
+    // new DialogRepositoryImpl();
     public GetDialogByIdUseCaseImpl(DialogRepositoryImpl dialogRepository) {
         this.dialogRepository = dialogRepository;
     }
