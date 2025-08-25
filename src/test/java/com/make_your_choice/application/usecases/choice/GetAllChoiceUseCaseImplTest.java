@@ -23,17 +23,22 @@ public class GetAllChoiceUseCaseImplTest {
 
     @BeforeEach
     void setup() {
+        // mocket repository
         choiceRepository = Mockito.mock(ChoiceRepositoryImpl.class);
+
+        // usecase to test
         getAllChoicesUseCase = new GetAllChoiceUseCaseImpl(choiceRepository);
     }
 
     @Test
     void testExecute_ReturnsAllChoices() {
+        // mocket data
         ChoiceEntity choice1 = new ChoiceEntity();
         ChoiceEntity choice2 = new ChoiceEntity();
 
         List<ChoiceEntity> choices = List.of(choice1, choice2);
 
+        // what must return
         when(choiceRepository.findAll()).thenReturn(choices);
 
         // execute test
@@ -50,6 +55,7 @@ public class GetAllChoiceUseCaseImplTest {
 
     @Test
     void testExecute_ReturnsEmptyList() {
+        // what must return
         when(choiceRepository.findAll()).thenReturn(List.of());
 
         // execute test

@@ -21,18 +21,24 @@ public class GetDialogByIdUseCaseImplTest {
 
     @BeforeEach
     void setup() {
+        // mocket repository
         dialogRepository = Mockito.mock(DialogRepositoryImpl.class);
+
+        // usecase to test
         getDialogUseCase = new GetDialogByIdUseCaseImpl(dialogRepository);
     }
 
     @Test
     void testGetDialogById_Found() {
+        // mocket data
         String code = "D42";
         DialogEntity dialog = new DialogEntity();
         setField(dialog, "id", 42L);
 
+        // what must return
         when(dialogRepository.findByCode(code)).thenReturn(Optional.of(dialog));
 
+        // execute test
         Optional<DialogEntity> result = getDialogUseCase.execute(code);
 
         assertTrue(result.isPresent());
@@ -43,9 +49,13 @@ public class GetDialogByIdUseCaseImplTest {
 
     @Test
     void testGetDialogById_NotFound() {
+        // mocket data
         String code = "D999";
+
+        // what must return
         when(dialogRepository.findByCode(code)).thenReturn(Optional.empty());
 
+        // execute test
         Optional<DialogEntity> result = getDialogUseCase.execute(code);
 
         assertFalse(result.isPresent());

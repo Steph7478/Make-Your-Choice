@@ -20,17 +20,22 @@ public class GetAllDialogsUseCaseImplTest {
 
     @BeforeEach
     void setup() {
+        // mocket repository
         dialogRepository = Mockito.mock(DialogRepositoryImpl.class);
+
+        // usecase to test
         getAllDialogsUseCase = new GetAllDialogsUseCaseImpl(dialogRepository);
     }
 
     @Test
     void testExecute_ReturnsAllDialogs() {
+        // mocket data
         DialogEntity dialog1 = new DialogEntity();
         DialogEntity dialog2 = new DialogEntity();
 
         List<DialogEntity> dialogs = List.of(dialog1, dialog2);
 
+        // what must return
         when(dialogRepository.findAll()).thenReturn(dialogs);
 
         // execute test
@@ -46,6 +51,7 @@ public class GetAllDialogsUseCaseImplTest {
 
     @Test
     void testExecute_ReturnsEmptyList() {
+        // what must return
         when(dialogRepository.findAll()).thenReturn(List.of());
 
         // execute test
