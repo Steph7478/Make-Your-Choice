@@ -6,7 +6,6 @@ import com.make_your_choice.application.usecases.choice.getdialogbycode.GetDialo
 import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCase;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
-import com.make_your_choice.support.TestReflectionUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -17,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.beans.factory.annotation.Autowired;
+import static com.make_your_choice.support.TestReflectionUtils.setField;
 
 import java.util.List;
 import java.util.Optional;
@@ -73,18 +73,18 @@ public class ChoiceControllerIntegrationTest {
     @BeforeEach
     void setup() {
         dialog = new DialogEntity();
-        TestReflectionUtils.setField(dialog, "id", 12L);
-        TestReflectionUtils.setField(dialog, "dialog", "Dialog 1");
+        setField(dialog, "id", 12L);
+        setField(dialog, "dialog", "Dialog 1");
 
         nextDialog = new DialogEntity();
-        TestReflectionUtils.setField(nextDialog, "id", 13L);
-        TestReflectionUtils.setField(nextDialog, "dialog", "Dialog 2");
+        setField(nextDialog, "id", 13L);
+        setField(nextDialog, "dialog", "Dialog 2");
 
         choice = new ChoiceEntity();
-        TestReflectionUtils.setField(choice, "id", 20L);
-        TestReflectionUtils.setField(choice, "choice", "Choice 1");
-        TestReflectionUtils.setField(choice, "dialog", dialog);
-        TestReflectionUtils.setField(choice, "nextDialog", nextDialog);
+        setField(choice, "id", 20L);
+        setField(choice, "choice", "Choice 1");
+        setField(choice, "dialog", dialog);
+        setField(choice, "nextDialog", nextDialog);
 
         Mockito.when(getAllChoiceUseCase.execute()).thenReturn(List.of(choice));
         Mockito.when(getChoiceByIdUseCase.execute("C20")).thenReturn(Optional.of(choice));
