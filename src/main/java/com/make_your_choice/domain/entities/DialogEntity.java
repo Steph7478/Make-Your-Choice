@@ -4,6 +4,11 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
+
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.Access;
 import jakarta.persistence.AccessType;
 
@@ -17,6 +22,9 @@ public class DialogEntity {
 
     private String dialog;
 
+    @OneToMany(mappedBy = "dialog")
+    private List<ChoiceEntity> choices = new ArrayList<>();
+
     public DialogEntity() {
     }
 
@@ -29,5 +37,9 @@ public class DialogEntity {
 
     public String getDialog() {
         return dialog;
+    }
+
+    public List<ChoiceEntity> getChoices() {
+        return choices;
     }
 }
