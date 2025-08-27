@@ -10,6 +10,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Optional;
 
+// How to Search Using JPQL
+
 @Repository
 public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> implements ChoiceEntityReadRepository {
 
@@ -18,6 +20,7 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
         super(entityManager, ChoiceEntity.class, "C");
     }
 
+    // Here im just removing the prefix "D"
     private Optional<DialogEntity> findDialogByCode(String dialogCode) {
         if (dialogCode == null || !dialogCode.startsWith("D")) {
             return Optional.empty();
@@ -30,6 +33,10 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
             return Optional.empty();
         }
     }
+
+    // * From all the rows in the table representing `ChoiceEntity`, select only
+    // those whose `dialog` attribute is equal to the dialogue I passed as a
+    // parameter (`:dialog`). */
 
     @Override
     public Optional<ChoiceEntity> findByDialogCode(String dialogCode) {
@@ -48,6 +55,9 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
         return result.stream().findFirst();
     }
 
+    // * From all the rows in the table representing `ChoiceEntity`, select only
+    // those whose `nextDialog` attribute is equal to the dialogue I passed as a
+    // parameter (`:nextDialog`). */
     @Override
     public Optional<ChoiceEntity> findByNextDialogCode(String nextDialogCode) {
         Optional<DialogEntity> dialogOpt = findDialogByCode(nextDialogCode);
