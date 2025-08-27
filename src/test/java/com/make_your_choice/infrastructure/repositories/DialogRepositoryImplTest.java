@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.context.annotation.ComponentScan;
 
+import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 
 import java.util.List;
@@ -36,11 +37,13 @@ public class DialogRepositoryImplTest {
         entityManager.persist(dialog2);
 
         entityManager.flush();
+        entityManager.clear();
 
         Long dialog1Id = (Long) getField(dialog1, "id");
         Long dialog2Id = (Long) getField(dialog2, "id");
 
         Optional<DialogEntity> found1 = repository.findByCode("D" + dialog1Id);
+
         assertThat(found1).isPresent();
         assertThat(found1.get().getDialog()).isEqualTo("Dialog 1");
         assertThat(found1.get().getCode()).isEqualTo("D" + dialog1Id);
@@ -51,4 +54,35 @@ public class DialogRepositoryImplTest {
         assertThat(dialogs).extracting(DialogEntity::getDialog)
                 .containsExactlyInAnyOrder("Dialog 1", "Dialog 2");
     }
+
+    @Test
+    void testFindChoicesByDialogCode() throws Exception {
+
+        DialogEntity dialog = new DialogEntity();
+        setField(dialog, "dialog", "Im the Dialog");
+        entityManager.persist(dialog);
+
+        ChoiceEntity choice1 = new ChoiceEntity();
+        setField(choice1, "choice", "Choice 1");
+        setField(choice1, "dialog", dialog);
+        entityManager.persist(choice1);
+
+        ChoiceEntity choice2 = new ChoiceEntity();
+        setField(choice2, "choice", "Choice 2");
+        setField(choice2, "dialog", dialog);
+        entityManager.persist(choice2);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        DialogEntity persistedDialog = entityManager.find(DialogEntity.class, getField(dialog, "id"));
+
+        List<ChoiceEntity> result = persistedDialog.getChoices();
+
+        assertThat(result).hasSize(2);
+        assertThat(result)
+                .extracting(ChoiceEntity::getChoice)
+                .containsExactlyInAnyOrder("Choice 1", "Choice 2");
+    }
+
 }
