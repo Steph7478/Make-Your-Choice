@@ -11,12 +11,14 @@ class MakeYourChoiceApplicationTests {
 
 	@BeforeAll
 	static void initEnv() {
+		String profile = System.getProperty("spring.profiles.active", "test");
 		Dotenv dotenv = Dotenv.configure()
-				.filename(".env." + System.getProperty("spring.profiles.active", "test"))
+				.filename(".env." + profile)
 				.ignoreIfMissing()
 				.load();
 
 		dotenv.entries().forEach(entry -> System.setProperty(entry.getKey(), entry.getValue()));
+
 	}
 
 	@Test
