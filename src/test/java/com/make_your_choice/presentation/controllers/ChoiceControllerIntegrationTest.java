@@ -38,9 +38,6 @@ public class ChoiceControllerIntegrationTest {
     private GetChoiceByIdUseCase getChoiceByIdUseCase;
 
     @Autowired
-    private GetDialogByCodeUseCase getDialogByCodeUseCase;
-
-    @Autowired
     private GetNextDialogByCodeUseCase getNextDialogByCodeUseCase;
 
     private ChoiceEntity choice;
@@ -88,7 +85,6 @@ public class ChoiceControllerIntegrationTest {
 
         Mockito.when(getAllChoiceUseCase.execute()).thenReturn(List.of(choice));
         Mockito.when(getChoiceByIdUseCase.execute("C20")).thenReturn(Optional.of(choice));
-        Mockito.when(getDialogByCodeUseCase.execute("D12")).thenReturn(Optional.of(choice));
         Mockito.when(getNextDialogByCodeUseCase.execute("D13")).thenReturn(Optional.of(choice));
     }
 
@@ -105,14 +101,6 @@ public class ChoiceControllerIntegrationTest {
         mockMvc.perform(get("/choices/C20").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.code").value(choice.getCode()));
-    }
-
-    @Test
-    void testGetChoiceByDialogCode() throws Exception {
-        mockMvc.perform(get("/choices/dialog/D12").contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.dialogCode").value(dialog.getCode()));
-
     }
 
     @Test
