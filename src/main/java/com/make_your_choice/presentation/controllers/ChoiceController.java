@@ -2,9 +2,7 @@ package com.make_your_choice.presentation.controllers;
 
 import com.make_your_choice.application.usecases.choice.getallchoice.GetAllChoiceUseCase;
 import com.make_your_choice.application.usecases.choice.getchoicebyid.GetChoiceByIdUseCase;
-import com.make_your_choice.application.usecases.choice.getdialogbycode.GetDialogByCodeUseCase;
 import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCase;
-import com.make_your_choice.application.usecases.dialog.getchoicesbydialogcode.GetChoicesByDialogCodeUseCase;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 
 import org.springframework.http.HttpStatus;
@@ -24,9 +22,7 @@ public class ChoiceController {
     public ChoiceController(
             GetAllChoiceUseCase getAllChoiceUseCase,
             GetChoiceByIdUseCase getChoiceByIdUseCase,
-            GetDialogByCodeUseCase getDialogByCodeUseCase,
-            GetNextDialogByCodeUseCase getNextDialogByCodeUseCase,
-            GetChoicesByDialogCodeUseCase getChoicesByDialogCodeUseCase) {
+            GetNextDialogByCodeUseCase getNextDialogByCodeUseCase) {
         this.getAllChoiceUseCase = getAllChoiceUseCase;
         this.getChoiceByIdUseCase = getChoiceByIdUseCase;
         this.getNextDialogByCodeUseCase = getNextDialogByCodeUseCase;
