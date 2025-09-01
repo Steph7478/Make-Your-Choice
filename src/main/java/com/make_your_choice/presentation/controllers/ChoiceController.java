@@ -4,8 +4,9 @@ import com.make_your_choice.application.usecases.choice.getallchoice.GetAllChoic
 import com.make_your_choice.application.usecases.choice.getchoicebyid.GetChoiceByIdUseCase;
 import com.make_your_choice.application.usecases.choice.getdialogbycode.GetDialogByCodeUseCase;
 import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCase;
-
+import com.make_your_choice.application.usecases.dialog.getchoicesbydialogcode.GetChoicesByDialogCodeUseCase;
 import com.make_your_choice.domain.entities.ChoiceEntity;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
@@ -18,17 +19,16 @@ public class ChoiceController {
 
     private final GetAllChoiceUseCase getAllChoiceUseCase;
     private final GetChoiceByIdUseCase getChoiceByIdUseCase;
-    private final GetDialogByCodeUseCase getDialogByCodeUseCase;
     private final GetNextDialogByCodeUseCase getNextDialogByCodeUseCase;
 
     public ChoiceController(
             GetAllChoiceUseCase getAllChoiceUseCase,
             GetChoiceByIdUseCase getChoiceByIdUseCase,
             GetDialogByCodeUseCase getDialogByCodeUseCase,
-            GetNextDialogByCodeUseCase getNextDialogByCodeUseCase) {
+            GetNextDialogByCodeUseCase getNextDialogByCodeUseCase,
+            GetChoicesByDialogCodeUseCase getChoicesByDialogCodeUseCase) {
         this.getAllChoiceUseCase = getAllChoiceUseCase;
         this.getChoiceByIdUseCase = getChoiceByIdUseCase;
-        this.getDialogByCodeUseCase = getDialogByCodeUseCase;
         this.getNextDialogByCodeUseCase = getNextDialogByCodeUseCase;
     }
 
@@ -43,16 +43,11 @@ public class ChoiceController {
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Choice not found"));
     }
 
-    @GetMapping("/dialog/{dialogCode}")
-    public ChoiceEntity getChoiceByDialogCode(@PathVariable String dialogCode) {
-        return getDialogByCodeUseCase.execute(dialogCode)
-                .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Choice not found for dialog"));
-    }
-
     @GetMapping("/next/{nextDialogCode}")
     public ChoiceEntity getNextChoiceByDialogCode(@PathVariable String nextDialogCode) {
         return getNextDialogByCodeUseCase.execute(nextDialogCode)
                 .orElseThrow(
                         () -> new ResponseStatusException(HttpStatus.NOT_FOUND, "Next choice not found for dialog"));
     }
+
 }
