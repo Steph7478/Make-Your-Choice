@@ -1,9 +1,8 @@
 package com.make_your_choice.presentation.controllers;
 
-import com.make_your_choice.application.usecases.choice.getallchoice.GetAllChoiceUseCase;
-import com.make_your_choice.application.usecases.choice.getchoicebyid.GetChoiceByIdUseCase;
-import com.make_your_choice.application.usecases.choice.getdialogbycode.GetDialogByCodeUseCase;
-import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCase;
+import com.make_your_choice.application.usecases.choice.getallchoice.GetAllChoiceUseCaseImpl;
+import com.make_your_choice.application.usecases.choice.getchoicebyid.GetChoiceByIdUseCaseImpl;
+import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCaseImpl;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 import org.junit.jupiter.api.BeforeEach;
@@ -36,13 +35,13 @@ public class ChoiceControllerIntegrationTest {
 
     // all the dependencies for the test
     @Autowired
-    private GetAllChoiceUseCase getAllChoiceUseCase;
+    private GetAllChoiceUseCaseImpl getAllChoiceUseCase;
 
     @Autowired
-    private GetChoiceByIdUseCase getChoiceByIdUseCase;
+    private GetChoiceByIdUseCaseImpl getChoiceByIdUseCase;
 
     @Autowired
-    private GetNextDialogByCodeUseCase getNextDialogByCodeUseCase;
+    private GetNextDialogByCodeUseCaseImpl getNextDialogByCodeUseCase;
 
     // to create the entities, since im gonna use it in many tests, i decided to set
     // it here at the top of the module, instead of setting it inside of the @Test,
@@ -56,23 +55,18 @@ public class ChoiceControllerIntegrationTest {
     @TestConfiguration
     static class MockUseCasesConfig {
         @Bean
-        public GetAllChoiceUseCase getAllChoiceUseCase() {
-            return Mockito.mock(GetAllChoiceUseCase.class);
+        public GetAllChoiceUseCaseImpl getAllChoiceUseCase() {
+            return Mockito.mock(GetAllChoiceUseCaseImpl.class);
         }
 
         @Bean
-        public GetChoiceByIdUseCase getChoiceByIdUseCase() {
-            return Mockito.mock(GetChoiceByIdUseCase.class);
+        public GetChoiceByIdUseCaseImpl getChoiceByIdUseCase() {
+            return Mockito.mock(GetChoiceByIdUseCaseImpl.class);
         }
 
         @Bean
-        public GetDialogByCodeUseCase getDialogByCodeUseCase() {
-            return Mockito.mock(GetDialogByCodeUseCase.class);
-        }
-
-        @Bean
-        public GetNextDialogByCodeUseCase getNextDialogByCodeUseCase() {
-            return Mockito.mock(GetNextDialogByCodeUseCase.class);
+        public GetNextDialogByCodeUseCaseImpl getNextDialogByCodeUseCase() {
+            return Mockito.mock(GetNextDialogByCodeUseCaseImpl.class);
         }
     }
 
