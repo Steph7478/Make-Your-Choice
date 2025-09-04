@@ -28,9 +28,13 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @ActiveProfiles("test")
 public class ChoiceControllerIntegrationTest {
 
+    // This gonna be used to execute the test. It performs full Spring MVC request
+    // handling but via mock request and response objects instead of a running
+    // server
     @Autowired
     private MockMvc mockMvc;
 
+    // all the dependencies for the test
     @Autowired
     private GetAllChoiceUseCase getAllChoiceUseCase;
 
@@ -40,10 +44,15 @@ public class ChoiceControllerIntegrationTest {
     @Autowired
     private GetNextDialogByCodeUseCase getNextDialogByCodeUseCase;
 
+    // to create the entities, since im gonna use it in many tests, i decided to set
+    // it here at the top of the module, instead of setting it inside of the @Test,
+    // for less repetition
     private ChoiceEntity choice;
     private DialogEntity dialog;
     private DialogEntity nextDialog;
 
+    // here i must configurate beans of my dependencies, since im gonna use then
+    // indirectly
     @TestConfiguration
     static class MockUseCasesConfig {
         @Bean
@@ -67,6 +76,7 @@ public class ChoiceControllerIntegrationTest {
         }
     }
 
+    // here i start to create the mocked tables
     @BeforeEach
     void setup() {
         dialog = new DialogEntity();
@@ -83,11 +93,13 @@ public class ChoiceControllerIntegrationTest {
         setField(choice, "dialog", dialog);
         setField(choice, "nextDialog", nextDialog);
 
+        // im saying to mockito what they must return
         Mockito.when(getAllChoiceUseCase.execute()).thenReturn(List.of(choice));
         Mockito.when(getChoiceByIdUseCase.execute("C20")).thenReturn(Optional.of(choice));
         Mockito.when(getNextDialogByCodeUseCase.execute("D13")).thenReturn(Optional.of(choice));
     }
 
+    // here i use mockMvc to execute and verify my integration tests
     @Test
     void testGetAllChoices() throws Exception {
         mockMvc.perform(get("/choices/").contentType(MediaType.APPLICATION_JSON))
