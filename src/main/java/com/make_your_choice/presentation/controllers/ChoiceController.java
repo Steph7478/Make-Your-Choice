@@ -1,8 +1,10 @@
 package com.make_your_choice.presentation.controllers;
 
-import com.make_your_choice.application.usecases.choice.getallchoice.GetAllChoiceUseCase;
-import com.make_your_choice.application.usecases.choice.getchoicebyid.GetChoiceByIdUseCase;
-import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCase;
+import com.make_your_choice.application.usecases.choice.getallchoice.GetAllChoiceUseCaseImpl;
+
+import com.make_your_choice.application.usecases.choice.getchoicebyid.GetChoiceByIdUseCaseImpl;
+
+import com.make_your_choice.application.usecases.choice.getnextdialogbycode.GetNextDialogByCodeUseCaseImpl;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 
 import org.springframework.http.HttpStatus;
@@ -15,14 +17,14 @@ import java.util.List;
 @RequestMapping("/choices")
 public class ChoiceController {
 
-    private final GetAllChoiceUseCase getAllChoiceUseCase;
-    private final GetChoiceByIdUseCase getChoiceByIdUseCase;
-    private final GetNextDialogByCodeUseCase getNextDialogByCodeUseCase;
+    private final GetAllChoiceUseCaseImpl getAllChoiceUseCase;
+    private final GetChoiceByIdUseCaseImpl getChoiceByIdUseCase;
+    private final GetNextDialogByCodeUseCaseImpl getNextDialogByCodeUseCase;
 
     public ChoiceController(
-            GetAllChoiceUseCase getAllChoiceUseCase,
-            GetChoiceByIdUseCase getChoiceByIdUseCase,
-            GetNextDialogByCodeUseCase getNextDialogByCodeUseCase) {
+            GetAllChoiceUseCaseImpl getAllChoiceUseCase,
+            GetChoiceByIdUseCaseImpl getChoiceByIdUseCase,
+            GetNextDialogByCodeUseCaseImpl getNextDialogByCodeUseCase) {
         this.getAllChoiceUseCase = getAllChoiceUseCase;
         this.getChoiceByIdUseCase = getChoiceByIdUseCase;
         this.getNextDialogByCodeUseCase = getNextDialogByCodeUseCase;
