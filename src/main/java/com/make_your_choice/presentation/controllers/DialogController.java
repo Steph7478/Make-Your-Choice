@@ -1,6 +1,7 @@
 package com.make_your_choice.presentation.controllers;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,18 +56,12 @@ public class DialogController {
         }
 
         private List<ChoiceEntity> getChoicesByDialogCode(String code) {
-                if (code == null || code.isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Code is required");
-                }
-
                 List<ChoiceEntity> choices = getChoicesByDialogCodeUseCase.execute(code);
 
-                if (choices.isEmpty()) {
-                        throw new ResponseStatusException(HttpStatus.NOT_FOUND,
-                                        "No choices found for dialog code: " + code);
-                }
-
-                return choices;
+                return Optional.of(choices)
+                                .filter(c -> !c.isEmpty())
+                                .orElseThrow(() -> new ResponseStatusException(
+                                                HttpStatus.NOT_FOUND, "No choices found for dialog " + code));
         }
 
 }
