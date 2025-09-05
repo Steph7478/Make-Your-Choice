@@ -21,7 +21,7 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
     }
 
     // Here im just removing the prefix "D"
-    private Optional<DialogEntity> findDialogByCode(String dialogCode) {
+    private Optional<DialogEntity> prefixRemover(String dialogCode) {
         if (dialogCode == null || !dialogCode.startsWith("D")) {
             return Optional.empty();
         }
@@ -40,7 +40,7 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
 
     @Override
     public Optional<ChoiceEntity> findByDialogCode(String dialogCode) {
-        Optional<DialogEntity> dialogOpt = findDialogByCode(dialogCode);
+        Optional<DialogEntity> dialogOpt = prefixRemover(dialogCode);
         if (dialogOpt.isEmpty()) {
             return Optional.empty();
         }
@@ -60,7 +60,7 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
     // parameter (`:nextDialog`). */
     @Override
     public Optional<ChoiceEntity> findByNextDialogCode(String nextDialogCode) {
-        Optional<DialogEntity> dialogOpt = findDialogByCode(nextDialogCode);
+        Optional<DialogEntity> dialogOpt = prefixRemover(nextDialogCode);
         if (dialogOpt.isEmpty()) {
             return Optional.empty();
         }
