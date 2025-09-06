@@ -10,11 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
-
-import com.make_your_choice.application.usecases.choice.getdialogbycode.GetDialogByCodeUseCaseImpl;
 import com.make_your_choice.application.usecases.dialog.getalldialog.GetAllDialogsUseCaseImpl;
 
 import com.make_your_choice.application.usecases.dialog.getchoicesbydialogcode.GetChoicesByDialogCodeUseCaseImpl;
+import com.make_your_choice.application.usecases.dialog.getdialogbyid.GetDialogByIdUseCaseImpl;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 
@@ -22,14 +21,14 @@ import com.make_your_choice.domain.entities.DialogEntity;
 @RequestMapping("/dialog")
 public class DialogController {
         private final GetAllDialogsUseCaseImpl getAllDialogsUseCase;
-        private final GetDialogByCodeUseCaseImpl getDialogByCodeUseCase;
+        private final GetDialogByIdUseCaseImpl getDialogByIdUseCase;
         private final GetChoicesByDialogCodeUseCaseImpl getChoicesByDialogCodeUseCase;
 
-        public DialogController(GetDialogByCodeUseCaseImpl getDialogByCodeUseCase,
+        public DialogController(GetDialogByIdUseCaseImpl getDialogByCodeUseCase,
                         GetChoicesByDialogCodeUseCaseImpl getChoicesByDialogCodeUseCase,
                         GetAllDialogsUseCaseImpl getAllDialogsUseCase) {
                 this.getChoicesByDialogCodeUseCase = getChoicesByDialogCodeUseCase;
-                this.getDialogByCodeUseCase = getDialogByCodeUseCase;
+                this.getDialogByIdUseCase = getDialogByCodeUseCase;
                 this.getAllDialogsUseCase = getAllDialogsUseCase;
         }
 
@@ -39,8 +38,8 @@ public class DialogController {
         }
 
         @GetMapping("/{dialogCode}")
-        public ChoiceEntity getChoiceByDialogCode(@PathVariable String dialogCode) {
-                return getDialogByCodeUseCase.execute(dialogCode)
+        public DialogEntity getDialogByCodeUseCase(@PathVariable String dialogCode) {
+                return getDialogByIdUseCase.execute(dialogCode)
                                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND,
                                                 "Choice not found for dialog"));
         }

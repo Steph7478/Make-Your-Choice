@@ -19,10 +19,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
-
-import com.make_your_choice.application.usecases.choice.getdialogbycode.GetDialogByCodeUseCaseImpl;
 import com.make_your_choice.application.usecases.dialog.getalldialog.GetAllDialogsUseCaseImpl;
 import com.make_your_choice.application.usecases.dialog.getchoicesbydialogcode.GetChoicesByDialogCodeUseCaseImpl;
+import com.make_your_choice.application.usecases.dialog.getdialogbyid.GetDialogByIdUseCaseImpl;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 
@@ -40,7 +39,7 @@ public class DialogControllerIntegrationTest {
     private GetChoicesByDialogCodeUseCaseImpl getChoicesByDialogCodeUseCase;
 
     @Autowired
-    private GetDialogByCodeUseCaseImpl getDialogByCodeUseCase;
+    private GetDialogByIdUseCaseImpl getDialogByIdUseCase;
 
     private DialogEntity dialog1;
     private DialogEntity dialog2;
@@ -60,8 +59,8 @@ public class DialogControllerIntegrationTest {
         }
 
         @Bean
-        public GetDialogByCodeUseCaseImpl getDialogByCodeUseCase() {
-            return Mockito.mock(GetDialogByCodeUseCaseImpl.class);
+        public GetDialogByIdUseCaseImpl getDialogByIdUseCase() {
+            return Mockito.mock(GetDialogByIdUseCaseImpl.class);
         }
     }
 
@@ -85,7 +84,7 @@ public class DialogControllerIntegrationTest {
 
         when(getAllDialogsUseCase.execute()).thenReturn(List.of(dialog1, dialog2));
         when(getChoicesByDialogCodeUseCase.execute("D42")).thenReturn(List.of(choice1, choice2));
-        when(getDialogByCodeUseCase.execute("D42")).thenReturn(Optional.of(choice1));
+        when(getDialogByIdUseCase.execute("D42")).thenReturn(Optional.of(dialog1));
     }
 
     @Test
@@ -107,11 +106,12 @@ public class DialogControllerIntegrationTest {
     }
 
     @Test
-    void testGetDialogByCode() throws Exception {
+    void testGetDialogById() throws Exception {
         mockMvc.perform(get("/dialog/D42").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.code").value(choice1.getCode()))
-                .andExpect(jsonPath("$.choice").value(choice1.getChoice()));
+                .andExpect(jsonPath("$.code").value(dialog1.getCode()))
+                .andExpect(jsonPath("$.choices").value(dialog1.getChoices()))
+                .andExpect(jsonPath("$.dialog").value(dialog1.getDialog()));
     }
 
 }
