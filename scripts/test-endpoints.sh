@@ -30,21 +30,21 @@ while true; do
                         echo -e "\nFn:getAllChoices()"
                         echo "Path: /"
                         echo
-                        curl $choicesURL/
+                        curl -s -w "\n\nHTTP Code: %{http_code}\n" $choicesURL/ | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                         echo
                         
                         echo -e "\nFn:getChoiceById()"
                         echo "Path: /choices/{code}"
                         read -p "Enter code: " code
                         echo
-                        curl $choicesURL/$code
+                        curl -s -w "\n\nHTTP Code: %{http_code}\n" $choicesURL/$code | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                         echo
                         
                         echo -e "\nFn:getNextChoiceByDialogCode()"
                         echo "Path: /choices/next/{nextDialogCode}"
                         read -p "Enter nextDialogCode: " nextDialogCode
                         echo
-                        curl $choicesURL/next/$nextDialogCode
+                        curl -s -w "\n\nHTTP Code: %{http_code}\n" $choicesURL/next/$nextDialogCode | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                         echo
                         ;;
                     2)
@@ -64,21 +64,21 @@ while true; do
                                     echo -e "\nFn:getAllChoices()"
                                     echo "Path: /"
                                     echo
-                                    curl $choicesURL/
+                                    curl -s -w "\n\nHTTP Code: %{http_code}\n" $choicesURL/ | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                                     ;;
                                 2)
                                     echo -e "\nFn:getChoiceById()"
                                     echo "Path: /choices/{code}"
                                     read -p "Enter code: " code
                                     echo
-                                    curl $choicesURL/$code
+                                    curl -s -w "\n\nHTTP Code: %{http_code}\n" $choicesURL/$code | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                                     ;;
                                 3)
                                     echo -e "\nFn:getNextChoiceByDialogCode()"
                                     echo "Path: /choices/next/{nextDialogCode}"
                                     read -p "Enter nextDialogCode: " nextDialogCode
                                     echo
-                                    curl $choicesURL/next/$nextDialogCode
+                                    curl -s -w "\n\nHTTP Code: %{http_code}\n" $choicesURL/next/$nextDialogCode | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                                     ;;
                                 0)
                                     echo -e "\nReturning to main menu..."
@@ -116,21 +116,21 @@ while true; do
                         echo -e "\nFn:getAllDialogs()"
                         echo "Path: /"
                         echo
-                        curl $dialogURL/
+                        curl -s -w "\n\nHTTP Code: %{http_code}\n" $dialogURL/ | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                         echo
                         
                         echo -e "\nFn:getDialogByCodeUseCase()"
                         echo "Path: /dialog/{dialogCode}"
                         read -p "Enter dialogCode: " dialogCode
                         echo
-                        curl $dialogURL/$dialogCode
+                        curl -s -w "\n\nHTTP Code: %{http_code}\n" $dialogURL/$dialogCode | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                         echo
                         
                         echo -e "\nFn:getChoicesByDialogCode()"
                         echo "Path: /dialog/choices/{code}"
                         read -p "Enter code: " code
                         echo
-                        curl $dialogURL/choices/$code
+                        curl -s -w "\n\nHTTP Code: %{http_code}\n" $dialogURL/choices/$code | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                         echo
                         ;;
                     2)
@@ -150,21 +150,21 @@ while true; do
                                     echo -e "\nFn:getAllDialogs()"
                                     echo "Path: /"
                                     echo
-                                    curl $dialogURL/
+                                    curl -s -w "\n\nHTTP Code: %{http_code}\n" $dialogURL/ | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                                     ;;
                                 2)
                                     echo -e "\nFn:getDialogByCodeUseCase()"
                                     echo "Path: /dialog/{dialogCode}"
                                     read -p "Enter dialogCode: " dialogCode
                                     echo
-                                    curl $dialogURL/$dialogCode
+                                    curl -s -w "\n\nHTTP Code: %{http_code}\n" $dialogURL/$dialogCode | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                                     ;;
                                 3)
                                     echo -e "\nFn:getChoicesByDialogCode()"
                                     echo "Path: /dialog/choices/{code}"
                                     read -p "Enter code: " code
                                     echo
-                                    curl $dialogURL/choices/$code
+                                    curl -s -w "\n\nHTTP Code: %{http_code}\n" $dialogURL/choices/$code | sed 's/},/},\n/g; s/{/\n{/g; s/\]/\n]/'
                                     ;;
                                 0)
                                     echo -e "\nReturning to main menu..."
