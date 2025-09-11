@@ -1,7 +1,7 @@
 #!/bin/bash
 
 echo "=== Spring Boot Debug Menu ==="
-echo "Choose log level:"
+echo -e "\nChoose log level:"
 echo "1) TRACE"
 echo "2) DEBUG"
 echo "3) INFO"
@@ -21,7 +21,7 @@ case $option in
     *) echo "Invalid option!"; exit 1 ;;
 esac
 
-echo "Choose profile:"
+echo -e "\nChoose profile:"
 echo "1) test"
 echo "2) dev"
 echo "3) prod"
