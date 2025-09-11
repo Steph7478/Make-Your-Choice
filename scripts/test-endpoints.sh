@@ -1,5 +1,9 @@
 #!/bin/bash
 
+choicesURL=http://localhost:8080/choices
+dialogURL=http://localhost:8080/dialog
+
+
 while true; do
     echo -e "\n=== Testing Endpoints ===\n"
     echo "Choose an endpoint:"
@@ -26,21 +30,21 @@ while true; do
                         echo -e "\nFn:getAllChoices()"
                         echo "Path: /"
                         echo
-                        curl http://localhost:8080/choices/
+                        curl $choicesURL/
                         echo
                         
                         echo -e "\nFn:getChoiceById()"
                         echo "Path: /choices/{code}"
                         read -p "Enter code: " code
                         echo
-                        curl http://localhost:8080/choices/$code
+                        curl $choicesURL/$code
                         echo
                         
                         echo -e "\nFn:getNextChoiceByDialogCode()"
                         echo "Path: /choices/next/{nextDialogCode}"
                         read -p "Enter nextDialogCode: " nextDialogCode
                         echo
-                        curl http://localhost:8080/choices/next/$nextDialogCode
+                        curl $choicesURL/next/$nextDialogCode
                         echo
                         ;;
                     2)
@@ -60,21 +64,21 @@ while true; do
                                     echo -e "\nFn:getAllChoices()"
                                     echo "Path: /"
                                     echo
-                                    curl http://localhost:8080/choices/
+                                    curl $choicesURL/
                                     ;;
                                 2)
                                     echo -e "\nFn:getChoiceById()"
                                     echo "Path: /choices/{code}"
                                     read -p "Enter code: " code
                                     echo
-                                    curl http://localhost:8080/choices/$code
+                                    curl $choicesURL/$code
                                     ;;
                                 3)
                                     echo -e "\nFn:getNextChoiceByDialogCode()"
                                     echo "Path: /choices/next/{nextDialogCode}"
                                     read -p "Enter nextDialogCode: " nextDialogCode
                                     echo
-                                    curl http://localhost:8080/choices/next/$nextDialogCode
+                                    curl $choicesURL/next/$nextDialogCode
                                     ;;
                                 0)
                                     echo -e "\nReturning to main menu..."
@@ -112,21 +116,21 @@ while true; do
                         echo -e "\nFn:getAllDialogs()"
                         echo "Path: /"
                         echo
-                        curl http://localhost:8080/dialog/
+                        curl $dialogURL/
                         echo
                         
                         echo -e "\nFn:getDialogByCodeUseCase()"
                         echo "Path: /dialog/{dialogCode}"
                         read -p "Enter dialogCode: " dialogCode
                         echo
-                        curl http://localhost:8080/dialog/$dialogCode
+                        curl $dialogURL/$dialogCode
                         echo
                         
                         echo -e "\nFn:getChoicesByDialogCode()"
                         echo "Path: /dialog/choices/{code}"
                         read -p "Enter code: " code
                         echo
-                        curl http://localhost:8080/dialog/choices/$code
+                        curl $dialogURL/choices/$code
                         echo
                         ;;
                     2)
@@ -146,21 +150,21 @@ while true; do
                                     echo -e "\nFn:getAllDialogs()"
                                     echo "Path: /"
                                     echo
-                                    curl http://localhost:8080/dialog/
+                                    curl $dialogURL/
                                     ;;
                                 2)
                                     echo -e "\nFn:getDialogByCodeUseCase()"
                                     echo "Path: /dialog/{dialogCode}"
                                     read -p "Enter dialogCode: " dialogCode
                                     echo
-                                    curl http://localhost:8080/dialog/$dialogCode
+                                    curl $dialogURL/$dialogCode
                                     ;;
                                 3)
                                     echo -e "\nFn:getChoicesByDialogCode()"
                                     echo "Path: /dialog/choices/{code}"
                                     read -p "Enter code: " code
                                     echo
-                                    curl http://localhost:8080/dialog/choices/$code
+                                    curl $dialogURL/choices/$code
                                     ;;
                                 0)
                                     echo -e "\nReturning to main menu..."
