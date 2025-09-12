@@ -1,29 +1,31 @@
 # 🎮 Make Your Choice
 
 📋 **Project Overview**  
-Make Your Choice is a Java Spring Boot application designed as a **learning project** to practice and apply **Domain-Driven Design (DDD)**, **Clean Architecture**, and **Test-Driven Development (TDD)**.  
-It simulates a short choice-based game, where dialogs and choices are stored and retrieved through a layered architecture that separates **domain**, **application use cases**, **infrastructure**, and **presentation**.  
+Make Your Choice is a **Java Spring Boot** application developed as a **learning project** to practice and apply **Domain-Driven Design (DDD)**, **Clean Architecture**, and **Test-Driven Development (TDD)**.  
+It simulates a short choice-based game where dialogs and choices are stored and retrieved through a layered architecture that separates **domain**, **application use cases**, **infrastructure**, and **presentation**.  
 
 ---
 
 ## 🚧 Project Status  
-This project is under active development and serves as a **hands-on playground** for improving skills in:  
+This project is **actively under development** and serves as a **hands-on playground** to improve skills in:
 
 - Java backend development  
 - Software architecture patterns (DDD, Clean Architecture)  
 - Unit and integration testing with TDD  
 - Repository and controller design with Spring Boot  
+- Docker usage  
 
 ---
 
 ## ✨ Features  
 
 - 🗂️ **Domain Entities**: `DialogEntity` and `ChoiceEntity` model the core of the game.  
-- 🧩 **Use Cases**: Encapsulated application logic such as *Get All Choices*, *Get Choice By Id*, *Get Dialog By Code*, etc.  
+- 🧩 **Use Cases**: Application logic encapsulated, such as *Get All Choices*, *Get Choice By Id*, *Get Dialog By Code*, etc.  
 - 🏛️ **DDD & Clean Architecture**: Clear separation of responsibilities (domain, application, infrastructure, presentation).  
-- 🧪 **TDD Workflow**: Comprehensive unit and integration tests guiding implementation.  
-- ⚙️ **Environment-based configuration**: Choose your own application name, database, and JPA strategy through `.env`.  
-- 📡 **REST Controllers**: Example endpoints for retrieving choices and dialogs.  
+- 🧪 **TDD Workflow**: Unit and integration tests guiding implementation.  
+- ⚙️ **Environment-based configuration**: Customize application name, database, and JPA strategy via `.env`.  
+- 📡 **REST Controllers**: Endpoints for retrieving choices and dialogs.  
+- 🐳 **Docker Ready**: Build and run the application easily inside a container.  
 
 ---
 
@@ -34,14 +36,16 @@ This project is under active development and serves as a **hands-on playground**
 - **Maven**  
 - **JUnit 5**  
 - **Dotenv Java**  
+- **Docker**  
 
 ---
 
 ## ⚙️ Installation and Running  
 
 ### Prerequisites  
-- Java 17+  
-- Maven 3.8+  
+- Java 17+ (if not using Docker)  
+- Maven 3.8+ (if not using Docker)  
+- Docker (optional, but recommended for isolated runs)  
 
 ### Steps  
 
@@ -52,33 +56,68 @@ git clone https://github.com/Steph7478/MakeYourChoice.git
 cd MakeYourChoice
 ```
 
-Create your own `.env` file and configure the environment variables.  
-You are free to choose the values depending on your needs.  
-
-Example `.env`:  
+Create your own `.env` file and configure environment variables:
 
 ```env
-SPRING_APPLICATION_NAME=  # you can pick any name
-SPRING_DATASOURCE_URL=  # or use PostgreSQL/MySQL if you prefer
-SPRING_DATASOURCE_USERNAME=  # set your database username
-SPRING_DATASOURCE_PASSWORD=  # set your database password
-SPRING_JPA_HIBERNATE_DDL_AUTO=  #create-drop or update / validate / none
+SPRING_APPLICATION_NAME=
+SPRING_DATASOURCE_URL=
+SPRING_DATASOURCE_USERNAME=
+SPRING_DATASOURCE_PASSWORD=
+SPRING_JPA_HIBERNATE_DDL_AUTO=
 ```
 
-Run the application using Maven Wrapper:  
+### Running locally via Maven:
 
 ```bash
 ./mvnw spring-boot:run -Dspring-boot.run.arguments="--spring.profiles.active=dev"
 ```
 
-Run the test suite:  
+### Running tests:
 
 ```bash
 ./mvnw test
 ```
 
+### 🐳 Docker
+You can run the application entirely inside a Docker container without installing Java or Maven locally.
+
+Build the Docker image:
+
+```bash
+docker build -t make-your-choice .
+```
+
+Run the application:
+
+```bash
+docker run --rm -p 8080:8080 make-your-choice
+```
+
+The application will be available at [http://localhost:8080](http://localhost:8080)  
+
+Port 8080 is exposed from the container to your machine.
+
+Run tests inside the container (optional):
+
+```bash
+docker run --rm make-your-choice mvn test
+```
+
+Executes all tests inside the container.  
+No need to have Maven or Java installed locally.
+
+### 📝 Operation Scripts
+The project includes a main script `ops.sh` to simplify running utilities:
+
+```bash
+./ops.sh debug       # Runs debug.sh
+./ops.sh endpoints   # Runs test-endpoints.sh
+```
+
+- `debug.sh`: Starts the application in debug mode.  
+- `test-endpoints.sh`: Tests application endpoints using curl.  
+
 ---
 
-## OBS
-
-This project is developed solely for **learning and practice purposes**.  
+## 🛡️ Notes
+This project is for learning and practice purposes only.
