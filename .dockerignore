@@ -1,0 +1,42 @@
+# === Padrões Gerais ===
+*.md
+*.log
+*.tmp
+*.swp
+*.bak
+*.DS_Store
+Thumbs.db
+
+# IDE / editor
+*.idea
+*.vscode
+*.iml
+
+# Sistema de versionamento
+.git
+.gitignore
+.gitattributes
+
+# Maven
+target/
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+
+# Docker
+Dockerfile
+.dockerignore
+
+# Configs locais / ambientes
+*.env
+.env.*
+
+# Banco de dados local
+dev.db
+
+# Scripts de desenvolvimento
+ops.sh
+scripts/
