@@ -24,4 +24,5 @@ jobs:
         env:
           SPRING_PROFILES_ACTIVE: test
         run: |
-          docker run --rm make-your-choice:test mvn -Dtest=com.make_your_choice.presentation.controllers.* test
+          docker run --rm make-your-choice:test \
+          mvn -Dtest=com.make_your_choice.presentation.controllers.*Test,com.make_your_choice.presentation.controllers.*IntegrationTest test
