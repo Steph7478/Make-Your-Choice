@@ -35,13 +35,13 @@ public class AuthorizationRules {
     public List<EndpointRule> publicEndpoints() {
         return List.of(
                 new EndpointRule(HttpMethod.GET, "/choices/**", false),
-                new EndpointRule(HttpMethod.GET, "/dialogs/**", false));
+                new EndpointRule(HttpMethod.GET, "/dialog/**", false));
     }
 
     public List<EndpointRule> privateEndpoints() {
         return List.of(
         // new EndpointRule(HttpMethod.POST, "/choices/**", true),
-        // new EndpointRule(HttpMethod.POST, "/dialogs/**", true)
+        // new EndpointRule(HttpMethod.POST, "/dialog/**", true)
         );
     }
 }
