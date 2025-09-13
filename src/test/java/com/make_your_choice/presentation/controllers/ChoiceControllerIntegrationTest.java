@@ -8,6 +8,7 @@ import com.make_your_choice.domain.entities.DialogEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
@@ -25,6 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(ChoiceController.class)
 @ActiveProfiles("test")
+@AutoConfigureMockMvc(addFilters = false)
 public class ChoiceControllerIntegrationTest {
 
     // This gonna be used to execute the test. It performs full Spring MVC request
