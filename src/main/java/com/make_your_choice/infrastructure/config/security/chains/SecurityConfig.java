@@ -37,8 +37,7 @@ public class SecurityConfig {
             config.setAllowedHeaders(List.of("*"));
             source.registerCorsConfiguration("/**", config);
             cors.configurationSource(source);
-        })
-                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
+        }).csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
         http.authorizeHttpRequests(auth -> {
             authorizationRules.publicEndpoints()
