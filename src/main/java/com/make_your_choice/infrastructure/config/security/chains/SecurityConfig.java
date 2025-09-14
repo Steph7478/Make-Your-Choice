@@ -2,12 +2,17 @@ package com.make_your_choice.infrastructure.config.security.chains;
 
 import com.make_your_choice.infrastructure.config.security.headers.SecurityHeadersConfig;
 import com.make_your_choice.infrastructure.config.security.rules.AuthorizationRules;
+
+import java.util.List;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.csrf.CookieCsrfTokenRepository;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 @Configuration
 public class SecurityConfig {
@@ -23,8 +28,17 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        http.csrf(csrf -> csrf
-                .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
+        http.cors(cors -> {
+            var source = new UrlBasedCorsConfigurationSource();
+            var config = new CorsConfiguration();
+            config.setAllowedOrigins(List.of("http://localhost"));
+            config.setAllowedMethods(List.of("GET"));
+            config.setAllowCredentials(true);
+            config.setAllowedHeaders(List.of("*"));
+            source.registerCorsConfiguration("/**", config);
+            cors.configurationSource(source);
+        })
+                .csrf(csrf -> csrf.csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse()));
 
         http.authorizeHttpRequests(auth -> {
             authorizationRules.publicEndpoints()
