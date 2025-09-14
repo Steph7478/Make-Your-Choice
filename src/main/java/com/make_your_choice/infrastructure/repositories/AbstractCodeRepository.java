@@ -1,6 +1,8 @@
 package com.make_your_choice.infrastructure.repositories;
 
+import com.make_your_choice.domain.valueobjects.Code;
 import jakarta.persistence.EntityManager;
+
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -23,39 +25,27 @@ public abstract class AbstractCodeRepository<T> {
                 .getResultList();
     }
 
-    public Optional<T> findByCode(String code) {
-        if (code == null || !code.startsWith(codePrefix)) {
+    public Optional<T> findByCode(String codeStr) {
+        Optional<Code> codeOpt = Code.fromString(codeStr, codePrefix);
+        if (codeOpt.isEmpty())
             return Optional.empty();
-        }
-        try {
-            Long id = Long.parseLong(code.substring(codePrefix.length()));
-            T entity = entityManager.find(entityClass, id);
-            return Optional.ofNullable(entity);
-        } catch (NumberFormatException e) {
-            return Optional.empty();
-        }
+
+        T entity = entityManager.find(entityClass, codeOpt.get().getId());
+        return Optional.ofNullable(entity);
     }
 
-    public List<T> findAllByCodes(List<String> codes) {
-        if (codes == null || codes.isEmpty()) {
+    public List<T> findAllByCodes(List<String> codesStr) {
+        if (codesStr == null || codesStr.isEmpty())
             return List.of();
-        }
 
-        List<Long> ids = codes.stream()
-                .filter(c -> c != null && c.startsWith(codePrefix))
-                .map(c -> {
-                    try {
-                        return Long.parseLong(c.substring(codePrefix.length()));
-                    } catch (NumberFormatException e) {
-                        return null;
-                    }
-                })
-                .filter(id -> id != null)
+        List<Long> ids = codesStr.stream()
+                .map(code -> Code.fromString(code, codePrefix))
+                .filter(Optional::isPresent)
+                .map(opt -> opt.get().getId())
                 .collect(Collectors.toList());
 
-        if (ids.isEmpty()) {
+        if (ids.isEmpty())
             return List.of();
-        }
 
         String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.id IN :ids";
         return entityManager.createQuery(jpql, entityClass)

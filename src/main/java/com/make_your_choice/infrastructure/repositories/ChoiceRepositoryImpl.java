@@ -3,6 +3,8 @@ package com.make_your_choice.infrastructure.repositories;
 import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.ChoiceEntityReadRepository;
+import com.make_your_choice.domain.valueobjects.Code;
+
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -20,31 +22,17 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
         super(entityManager, ChoiceEntity.class, "C");
     }
 
-    // Here im just removing the prefix "D"
-    private Optional<DialogEntity> prefixRemover(String dialogCode) {
-        if (dialogCode == null || !dialogCode.startsWith("D")) {
-            return Optional.empty();
-        }
-        try {
-            Long id = Long.parseLong(dialogCode.substring(1));
-            DialogEntity dialog = entityManager.find(DialogEntity.class, id);
-            return Optional.ofNullable(dialog);
-        } catch (NumberFormatException e) {
-            return Optional.empty();
-        }
-    }
-
     // * From all the rows in the table representing `ChoiceEntity`, select only
     // those whose `dialog` attribute is equal to the dialogue I passed as a
     // parameter (`:dialog`). */
 
     @Override
     public Optional<ChoiceEntity> findByDialogCode(String dialogCode) {
-        Optional<DialogEntity> dialogOpt = prefixRemover(dialogCode);
+        Optional<Code> dialogOpt = Code.fromString(dialogCode, "D");
         if (dialogOpt.isEmpty()) {
             return Optional.empty();
         }
-        DialogEntity dialog = dialogOpt.get();
+        DialogEntity dialog = entityManager.find(DialogEntity.class, dialogOpt.get().getId());
 
         List<ChoiceEntity> result = entityManager.createQuery(
                 "SELECT c FROM ChoiceEntity c WHERE c.dialog = :dialog", ChoiceEntity.class)
@@ -60,11 +48,13 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
     // parameter (`:nextDialog`). */
     @Override
     public Optional<ChoiceEntity> findByNextDialogCode(String nextDialogCode) {
-        Optional<DialogEntity> dialogOpt = prefixRemover(nextDialogCode);
+        Optional<Code> dialogOpt = Code.fromString(nextDialogCode, "D");
+
         if (dialogOpt.isEmpty()) {
             return Optional.empty();
         }
-        DialogEntity dialog = dialogOpt.get();
+
+        DialogEntity dialog = entityManager.find(DialogEntity.class, dialogOpt.get().getId());
 
         List<ChoiceEntity> result = entityManager.createQuery(
                 "SELECT c FROM ChoiceEntity c WHERE c.nextDialog = :nextDialog", ChoiceEntity.class)
