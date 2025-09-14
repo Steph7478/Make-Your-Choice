@@ -60,7 +60,6 @@ while true; do
 
                             case $endpoint in
                                 1)
-                                    echo -e "\n=== Testing all endpoints ==="
                                     echo -e "\nFn:getAllChoices()"
                                     echo "Path: /"
                                     echo
@@ -146,7 +145,6 @@ while true; do
 
                             case $endpoint in
                                 1)
-                                    echo -e "\n=== Testing all endpoints ==="
                                     echo -e "\nFn:getAllDialogs()"
                                     echo "Path: /"
                                     echo
