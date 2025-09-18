@@ -4,6 +4,7 @@ import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.ChoiceEntityReadRepository;
 import com.make_your_choice.domain.valueobjects.Code;
+import com.make_your_choice.infrastructure.cache.Cache;
 
 import jakarta.persistence.EntityManager;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ import java.util.Optional;
 @Repository
 public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> implements ChoiceEntityReadRepository {
 
+    private final Cache<String, Optional<ChoiceEntity>> cache = new Cache<>(100, 5000, 16);
+
     @Autowired
     public ChoiceRepositoryImpl(EntityManager entityManager) {
         super(entityManager, ChoiceEntity.class, "C");
@@ -28,10 +31,15 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
 
     @Override
     public Optional<ChoiceEntity> findByDialogCode(String dialogCode) {
+
         Optional<Code> dialogOpt = Code.fromString(dialogCode, "D");
-        if (dialogOpt.isEmpty()) {
+        if (dialogOpt.isEmpty())
             return Optional.empty();
-        }
+
+        Optional<ChoiceEntity> cached = cache.get(dialogCode);
+        if (cached != null)
+            return cached;
+
         DialogEntity dialog = entityManager.find(DialogEntity.class, dialogOpt.get().getId());
 
         List<ChoiceEntity> result = entityManager.createQuery(
@@ -40,7 +48,10 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
                 .setMaxResults(1)
                 .getResultList();
 
-        return result.stream().findFirst();
+        Optional<ChoiceEntity> choice = result.stream().findFirst();
+        cache.put(dialogCode, choice);
+
+        return choice;
     }
 
     // * From all the rows in the table representing `ChoiceEntity`, select only
@@ -48,11 +59,14 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
     // parameter (`:nextDialog`). */
     @Override
     public Optional<ChoiceEntity> findByNextDialogCode(String nextDialogCode) {
-        Optional<Code> dialogOpt = Code.fromString(nextDialogCode, "D");
 
-        if (dialogOpt.isEmpty()) {
+        Optional<Code> dialogOpt = Code.fromString(nextDialogCode, "D");
+        if (dialogOpt.isEmpty())
             return Optional.empty();
-        }
+
+        Optional<ChoiceEntity> cached = cache.get(nextDialogCode);
+        if (cached != null)
+            return cached;
 
         DialogEntity dialog = entityManager.find(DialogEntity.class, dialogOpt.get().getId());
 
@@ -62,6 +76,9 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
                 .setMaxResults(1)
                 .getResultList();
 
-        return result.stream().findFirst();
+        Optional<ChoiceEntity> choice = result.stream().findFirst();
+        cache.put(nextDialogCode, choice);
+
+        return choice;
     }
 }

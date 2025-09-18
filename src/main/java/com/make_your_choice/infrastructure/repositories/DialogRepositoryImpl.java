@@ -4,6 +4,7 @@ import com.make_your_choice.domain.entities.ChoiceEntity;
 import com.make_your_choice.domain.entities.DialogEntity;
 import com.make_your_choice.domain.repositories.DialogEntityReadRepository;
 import com.make_your_choice.domain.valueobjects.Code;
+import com.make_your_choice.infrastructure.cache.Cache;
 
 import jakarta.persistence.EntityManager;
 
@@ -18,6 +19,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DialogRepositoryImpl extends AbstractCodeRepository<DialogEntity> implements DialogEntityReadRepository {
 
+    private final Cache<String, List<ChoiceEntity>> listCache = new Cache<>(100, 5000, 16);
+
     @Autowired
     public DialogRepositoryImpl(EntityManager entityManager) {
         super(entityManager, DialogEntity.class, "D");
@@ -25,15 +28,24 @@ public class DialogRepositoryImpl extends AbstractCodeRepository<DialogEntity> i
 
     @Override
     public List<ChoiceEntity> findChoicesByDialogCode(String dialogCode) {
+
         Optional<Code> codeOpt = Code.fromString(dialogCode, "D");
         if (codeOpt.isEmpty())
             return List.of();
+
+        List<ChoiceEntity> cached = listCache.get(dialogCode);
+        if (cached != null)
+            return cached;
 
         DialogEntity dialog = entityManager.find(DialogEntity.class, codeOpt.get().getId());
         if (dialog == null)
             return List.of();
 
-        return dialog.getChoices();
+        List<ChoiceEntity> choices = dialog.getChoices();
+
+        listCache.put(dialogCode, choices);
+
+        return choices;
     }
 
 }
