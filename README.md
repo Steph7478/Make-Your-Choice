@@ -1,7 +1,8 @@
+
 # 🎮 Make Your Choice
 
-📋 **Project Overview**
-Make Your Choice is a **Java Spring Boot** application developed as a **learning project** to practice and apply **Domain-Driven Design (DDD)**, **Clean Architecture**, and **Test-Driven Development (TDD)**.
+📋 **Project Overview**  
+Make Your Choice is a **Java Spring Boot** application developed as a **learning project** to practice and apply **Domain-Driven Design (DDD)**, **Clean Architecture**, and **Test-Driven Development (TDD)**.  
 It simulates a short choice-based game where dialogs and choices are stored and retrieved through a layered architecture that separates **domain**, **application use cases**, **infrastructure**, and **presentation**.
 
 ---
@@ -15,6 +16,7 @@ This project is **actively under development** and serves as a **hands-on playgr
 * Unit and integration testing with TDD
 * Repository and controller design with Spring Boot
 * Docker usage
+* CORS handling and caching mechanisms
 
 ---
 
@@ -28,6 +30,8 @@ This project is **actively under development** and serves as a **hands-on playgr
 * 📡 **REST Controllers**: Endpoints for retrieving choices and dialogs.
 * 🐳 **Docker Ready**: Build and run the application easily inside a container.
 * 🔒 **Spring Security**: Protects endpoints with basic authorization rules, applies security headers, and sets the stage for future authentication mechanisms.
+* 🌐 **CORS Support**: Configured to handle cross-origin requests safely.
+* 🗄️ **Caching Layer**: In-memory cache implementation to reduce database hits and improve performance.
 
 ---
 
@@ -40,6 +44,8 @@ This project is **actively under development** and serves as a **hands-on playgr
 * **Dotenv Java**
 * **Docker**
 * **Spring Security**
+* **CORS Configuration**
+* **Custom Cache Implementation**
 
 ---
 
@@ -47,9 +53,9 @@ This project is **actively under development** and serves as a **hands-on playgr
 
 ### Prerequisites
 
-* Java 17+ (if not using Docker)
-* Maven 3.8+ (if not using Docker)
-* Docker (optional, but recommended for isolated runs)
+* Java 17+ (if not using Docker)  
+* Maven 3.8+ (if not using Docker)  
+* Docker (optional, but recommended for isolated runs)  
 
 ### Steps
 
@@ -84,8 +90,6 @@ SPRING_JPA_HIBERNATE_DDL_AUTO=
 
 ### 🐳 Docker
 
-You can run the application entirely inside a Docker container without installing Java or Maven locally.
-
 Build the Docker image:
 
 ```bash
@@ -98,8 +102,7 @@ Run the application:
 docker run --rm -p 8080:8080 make-your-choice
 ```
 
-The application will be available at [http://localhost:8080](http://localhost:8080)
-
+The application will be available at [http://localhost:8080](http://localhost:8080)  
 Port 8080 is exposed from the container to your machine.
 
 Run tests inside the container (optional):
@@ -108,8 +111,7 @@ Run tests inside the container (optional):
 docker run --rm make-your-choice mvn test
 ```
 
-Executes all tests inside the container.
-No need to have Maven or Java installed locally.
+Executes all tests inside the container. No need to have Maven or Java installed locally.
 
 ### 📝 Operation Scripts
 
@@ -120,7 +122,7 @@ The project includes a main script `ops.sh` to simplify running utilities:
 ./ops.sh endpoints   # Runs test-endpoints.sh
 ```
 
-* `debug.sh`: Starts the application in debug mode.
+* `debug.sh`: Starts the application in debug mode.  
 * `test-endpoints.sh`: Tests application endpoints using curl.
 
 ---
@@ -129,15 +131,24 @@ The project includes a main script `ops.sh` to simplify running utilities:
 
 The project integrates **Spring Security** to:
 
-* Protect REST endpoints with basic authorization rules (public vs private endpoints).
-* Deny access to unspecified routes by default.
-* Apply security headers to improve protection against common attacks (CSP, HSTS, X-Frame-Options, Referrer Policy).
-* Allow future integration of login mechanisms such as JWT, OAuth2, or custom authentication.
+* Protect REST endpoints with basic authorization rules (public vs private endpoints).  
+* Deny access to unspecified routes by default.  
+* Apply security headers to improve protection against common attacks (CSP, HSTS, X-Frame-Options, Referrer Policy).  
+* Allow future integration of login mechanisms such as JWT, OAuth2, or custom authentication.  
+* Enable **CORS** for safe cross-origin requests.
 
 Currently, the project **does not implement user login or authentication**; private endpoints are placeholders for future secured routes.
 
 ---
 
+## ⚡ Performance Notes
+
+* **Caching Layer**: An in-memory cache (`Cache<K,V>`) reduces database hits for frequently accessed entities, improving performance.  
+* **Shard-based design**: Supports concurrent access with minimal locking.  
+* **TTL (time-to-live)**: Cached items automatically expire after a configured duration.
+
+---
+
 ## 🛡️ Disclaimer
 
-This project is for learning and practice purposes only.
+This project is for **learning and practice purposes only**.
