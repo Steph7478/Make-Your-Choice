@@ -38,12 +38,22 @@ public abstract class AbstractCodeRepository<T> {
         return Optional.ofNullable(entity);
     }
 
-    public List<T> findAll() {
-        String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e";
+    protected String buildFetchQuery(String... collectionsToFetch) {
+        StringBuilder jpql = new StringBuilder("SELECT e FROM " + entityClass.getSimpleName() + " e");
+        if (collectionsToFetch != null) {
+            for (String coll : collectionsToFetch) {
+                jpql.append(" LEFT JOIN FETCH e.").append(coll);
+            }
+        }
+        return jpql.toString();
+    }
+
+    public List<T> findAll(String... collectionsToFetch) {
+        String jpql = buildFetchQuery(collectionsToFetch);
         return entityManager.createQuery(jpql, entityClass).getResultList();
     }
 
-    public List<T> findAllByCodes(List<String> codesStr) {
+    public List<T> findAllByCodes(List<String> codesStr, String... collectionsToFetch) {
         if (codesStr == null || codesStr.isEmpty())
             return List.of();
 
@@ -56,7 +66,7 @@ public abstract class AbstractCodeRepository<T> {
         if (ids.isEmpty())
             return List.of();
 
-        String jpql = "SELECT e FROM " + entityClass.getSimpleName() + " e WHERE e.id IN :ids";
+        String jpql = buildFetchQuery(collectionsToFetch) + " WHERE e.id IN :ids";
         return entityManager.createQuery(jpql, entityClass)
                 .setParameter("ids", ids)
                 .getResultList();

@@ -25,6 +25,16 @@ public class ChoiceRepositoryImpl extends AbstractCodeRepository<ChoiceEntity> i
         super(entityManager, ChoiceEntity.class, "C");
     }
 
+    @Override
+    public List<ChoiceEntity> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    public List<ChoiceEntity> findAllByCodes(List<String> codesStr) {
+        return super.findAllByCodes(codesStr);
+    }
+
     // * From all the rows in the table representing `ChoiceEntity`, select only
     // those whose `dialog` attribute is equal to the dialogue I passed as a
     // parameter (`:dialog`). */

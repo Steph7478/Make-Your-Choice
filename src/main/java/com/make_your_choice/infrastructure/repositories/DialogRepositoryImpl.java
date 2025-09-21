@@ -27,6 +27,16 @@ public class DialogRepositoryImpl extends AbstractCodeRepository<DialogEntity> i
     }
 
     @Override
+    public List<DialogEntity> findAll() {
+        return super.findAll();
+    }
+
+    @Override
+    public List<DialogEntity> findAllByCodes(List<String> codesStr) {
+        return super.findAllByCodes(codesStr);
+    }
+
+    @Override
     public List<ChoiceEntity> findChoicesByDialogCode(String dialogCode) {
 
         Optional<Code> codeOpt = Code.fromString(dialogCode, "D");
